@@ -51,7 +51,7 @@ def processData(filecontent):
                                      datetime.datetime.strptime(
                                          str(line[1][1]), '%d/%m/%Y')]
         except ValueError:
-            log_filename = 'errors.log'
+            log_filename = 'error.log'
             logging.basicConfig(filename=log_filename,
                                 level=logging.ERROR,)
             ident = str(line[0])
