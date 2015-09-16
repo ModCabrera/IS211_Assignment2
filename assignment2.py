@@ -9,7 +9,7 @@ import logging
 import argparse
 
 
-def downloadData(url):
+def download_data(url):
     """
     Args:
         response (inst) : Opens access to URL site.
@@ -20,7 +20,7 @@ def downloadData(url):
         filedata (dict): Dictionary of data {ID: Name,Birthday}.
 
     Examples:
-        >>> downloadData('https://www.google.com')
+        >>> download_data('https://www.google.com')
         >>>
     """
     response = urllib2.urlopen(url)
@@ -31,7 +31,7 @@ def downloadData(url):
     return filedata
 
 
-def processData(filecontent):
+def process_data(filecontent):
     """
     Args:
         dataset (dict) : Dictionary storing processed data.
@@ -41,7 +41,7 @@ def processData(filecontent):
         dataset (dict): Dictionary of valid processed data{ID: Name,Birthday}.
 
     Examples:
-        >>> processData(downloadData(url))
+        >>> process_data(downloadData(url))
         >>>
     """
     dataset = {}
@@ -65,7 +65,7 @@ def processData(filecontent):
     return dataset
 
 
-def displayPerson(idnum, persondata):
+def display_person(idnum, persondata):
     """
     Args:
         idNum (int) : User number to be indentified.
@@ -76,7 +76,7 @@ def displayPerson(idnum, persondata):
         None
 
     Examples:
-        >>> displayPerson(1, processData(filecontent))
+        >>> display_person(1, process_data(filecontent))
         >>> 'Person 1 is John Smith with a birthday of 1985-08-02.
     """
     idnum = int(idnum)
@@ -109,17 +109,17 @@ def main():
         if useurl is False:
             exit()
         else:
-            csvdata = downloadData(useurl.url)
+            csvdata = download_data(useurl.url)
             while True:
                 try:
                     user_input = raw_input('Enter ID # to look up?')
                     if int(user_input) <= 0:
                         exit()
                     else:
-                        displayPerson(user_input, processData(csvdata))
+                        display_person(user_input, process_data(csvdata))
                 except (TypeError, NameError):
                     exit()
-    except:
+    except (urllib2.HTTPError, urllib2.URLError):
         exit()
 
 if __name__ == '__main__':
