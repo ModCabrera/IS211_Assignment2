@@ -101,7 +101,6 @@ def main():
         >>> python assignmnet2.py --url https://www.google.com/some.csv
         >>> Enter ID # to look up?
     """
-
     try:
         parser = argparse.ArgumentParser('Allow URL to load in script')
         parser.add_argument('--url', help='Load URL to Script.', type=str)
